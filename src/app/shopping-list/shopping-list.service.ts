@@ -14,7 +14,18 @@ export class ShoppingListService {
     this.ingredientChanged.emit(this.ingredients);
   }
   addIngredients(ingredients: Ingredient[]) {
-    this.ingredients.push(...ingredients);
+    for (const ingredient1 of ingredients) {
+      let pass = false;
+      for (const ingredient2 of this.ingredients) {
+        if (ingredient1.name === ingredient2.name) {
+          ingredient2.amount += ingredient1.amount;
+          pass = true;
+        }
+      }
+      if (!pass) {
+        this.ingredients.push(ingredient1);
+      }
+    }
     this.ingredientChanged.emit(this.ingredients);
   }
 }
