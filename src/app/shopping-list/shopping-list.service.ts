@@ -3,7 +3,7 @@ import {EventEmitter} from '@angular/core';
 
 export class ShoppingListService {
   private ingredients: Ingredient[] = [new Ingredient('Apples', 5), new Ingredient('Tomatoes', 10)];
-  IngredientChanged = new EventEmitter<Ingredient[]>();
+  ingredientChanged = new EventEmitter<Ingredient[]>();
 
   getIngredients() {
     return this.ingredients.slice();
@@ -11,6 +11,10 @@ export class ShoppingListService {
 
   addIngredient(ingredient: Ingredient) {
     this.ingredients.push(ingredient);
-    this.IngredientChanged.emit(this.ingredients);
+    this.ingredientChanged.emit(this.ingredients);
+  }
+  addIngredients(ingredients: Ingredient[]) {
+    this.ingredients.push(...ingredients);
+    this.ingredientChanged.emit(this.ingredients);
   }
 }
